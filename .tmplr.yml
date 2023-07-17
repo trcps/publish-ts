@@ -1,0 +1,50 @@
+steps:
+  - read: package_name
+    prompt: "What is the name of the package?"
+    default:
+      from: git.remote_name
+      fallback:
+        from: filesystem.rootdir
+
+  - read: package_description
+    prompt: "Describe the package in a sentence."
+  
+  - read: package_author
+    prompt: "Who is the author of the package?"
+    default:
+      from: git.author_name
+
+  - read: repo_host
+    from: git.remote_provider
+
+  - read: repo_owner
+    from: git.remote_owner
+
+  - read: repo_name
+    from: git.remote_name
+
+  - read: repo_url
+    eval: 'https://{{ repo_host }}/{{ repo_owner }}/{{ repo_name }}'
+
+  - read: issues_url
+    eval: '{{ repo_url }}/issues'
+
+  - read: homepage_url
+    prompt: "What is the project home page?"
+    default:
+      eval: '{{ repo_url }}#readme'
+
+  - read: clone_url
+    prompt: "Where can people clone the project from?"
+    default:
+      from: git.remote_url
+
+  - read: auto_publish
+    prompt: "Should the package be published automatically (when pushed to main branch with a version bump)? You MUST add a GitHub secret named NPM_TOKEN for this to work if you choose yes."
+    choices:
+      - yes
+      - no: ''
+
+  - if: auto_publish
+    copy: .github/workflows/publish.yml
+    to: .github/workflows/publish.yml.tmplr
