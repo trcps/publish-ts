@@ -24,9 +24,12 @@ jobs:
         run: npm run lint
 
       - name: Fix README for NPM
-        run: sed -i '' '/logo-dark\.svg/d' README.md
+        run: sed -i '/logo-dark\.svg/d' README.md
       
       - name: Publish
+        env:
+          npm_token: ${{ secrets.NPM_AUTH_TOKEN }}
+        if: ${{ env.npm_token != '' }}
         uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_AUTH_TOKEN }}
