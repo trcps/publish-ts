@@ -2,6 +2,8 @@
 
 A template for publhsing TypeScript packages to npm.
 
+> ⚠️⚠️ **WORK IN PROGRESS, DONT USE** ⚠️⚠️
+
 ## Usage
 
 Create your repository, clone it, then run the following:
