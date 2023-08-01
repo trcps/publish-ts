@@ -31,20 +31,34 @@ steps:
 
   - read: homepage_url
     prompt: "What is the project home page?"
-    default:
-      eval: '{{ repo_url }}#readme'
+    default: '{{ repo_url }}#readme'
 
   - read: clone_url
     prompt: "Where can people clone the project from?"
     default:
       from: git.remote_url
 
-  - read: auto_publish
-    prompt: "Should the package be published automatically (when pushed to main branch with a version bump)? You MUST add a GitHub secret named NPM_TOKEN for this to work if you choose yes."
-    choices:
-      - yes
-      - no: ''
+  - use: trcps/npm-autopublish
+    with:
+      test_command: npm run coverage
+      lint_command: npm run lint
 
-  - if: auto_publish
-    copy: .github/workflows/publish.yml
-    to: .github/workflows/publish.yml.tmplr
+  - copy: README.md.tmpl
+    to: README.md
+  - remove: node_modules
+  - update: '**/*.ts'
+  - update: package.json
+  - copy: workflows/**/*
+    to: .github/workflows
+  - remove: workflows
+
+  - use: trcps/license
+    with:
+      owner: '{{ package_author }}'
+      project_name: '{{ package_name }}'
+      project_url: '{{ homepage_url }}'
+
+  - remove: '**/*.tmpl'
+    include hidden: true
+
+  - remove: .tmplr.yml

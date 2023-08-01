@@ -1,3 +1,5 @@
+> _made with [publish-ts](https://github.com/trcps/publish-ts)_
+
 <div align="right">
 
 [![npm bundle size](https://img.shields.io/bundlephobia/minzip/{{ tmplr.package_name }}@latest?color=black&label=&style=flat-square)](https://bundlephobia.com/package/{{ tmplr.package_name }}@latest)
@@ -17,9 +19,9 @@
 // a nice code example here
 // would be pretty nice!
 
-import { someFunction } from '{{ tmplr.package_name }}'
+import { {{ tmplr.package_name | camelCase }} } from '{{ tmplr.package_name }}'
 
-console.log(someFunction())
+console.log({{ tmplr.package_name | camelCase }}().msg)
 ```
 
 <br>
@@ -51,14 +53,14 @@ import * from 'https://esm.sh/{{ tmplr.package_name }}'
 
 # Usage
 
-Explain in details what the package does.
+_Explain in details what the package does._
 
 ```js
 // perhaps with some nice code examples.
 
 import { someFunction } from '{{ tmplr.package_name }}'
 
-console.log(someFunction())
+console.log(someFunction().msg)
 ```
 
 <br>
