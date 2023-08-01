@@ -1,4 +1,6 @@
-> _made with [publish-ts](https://github.com/trcps/publish-ts)_
+> _👷🏽 TODO: This project is made with [publish-ts](https://github.com/trcps/publish-ts), read the docs to learn more._
+
+> _👷🏽 TODO: Read all the sections marked with "👷🏽 TODO", do them, and remove them from this README._
 
 <div align="right">
 
@@ -46,21 +48,22 @@ npm i {{ tmplr.package_name }}
 Browser / [Deno](https://deno.land):
 
 ```js
-import * from 'https://esm.sh/{{ tmplr.package_name }}'
+import { {{ tmplr.package_name | camelCase }} } from 'https://esm.sh/{{ tmplr.package_name }}'
 ```
+> _👷🏽 TODO: add the most important necessary imports from {{ tmplr.package_name }} here._
 
 <br>
 
 # Usage
 
-_Explain in details what the package does._
+> _👷🏽 TODO: explain in details what {{ tmplr.package_name }} does._
 
 ```js
 // perhaps with some nice code examples.
 
-import { someFunction } from '{{ tmplr.package_name }}'
+import { {{ tmplr.package_name | camelCase }} } from '{{ tmplr.package_name }}'
 
-console.log(someFunction().msg)
+console.log({{ tmplr.package_name | camelCase }}().msg)
 ```
 
 <br>
